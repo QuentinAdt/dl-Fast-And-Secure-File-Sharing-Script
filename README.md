@@ -1,64 +1,60 @@
-# dl - Fast and Secure File Sharing Script
+# File Sharing Script
 
-## Description
-
-`dl` is a Bash function that sets up a secure HTTPS server to share a file on your local network. It uses Python's `http.server` module with SSL encryption to serve the file, making it accessible via HTTPS.
+This repository contains a Bash function `dl()` that allows easy and secure file sharing over a local network using HTTPS.
 
 ## Features
 
-- Serves files over HTTPS for secure transfer
-- Supports custom port selection
-- Option for random port assignment
-- Automatic handling of port conflicts
-- Supports serving files with various encodings
+- Shares a single file over HTTPS
+- Creates a self-signed SSL certificate
+- Supports custom port selection or random port assignment
+- Provides secure download instructions
 
-## Prerequisites
+## Requirements
 
-- Bash shell
+- Bash
 - Python 3
 - OpenSSL
-- `fuser` command (usually part of the `psmisc` package)
+- netcat (nc)
+
+## Installation
+
+1. Clone this repository:
+   ```
+   git clone https://github.com/yourusername/file-sharing-script.git
+   ```
+
+2. Add the following line to your `.bashrc` or `.zshrc`:
+   ```
+   source /path/to/file-sharing-script/dl.sh
+   ```
+
+3. Reload your shell configuration:
+   ```
+   source ~/.bashrc
+   ```
+   or
+   ```
+   source ~/.zshrc
+   ```
 
 ## Usage
 
-1. Source the script in your Bash environment:
-`source /path/to/script/file`
+To share a file:
 
-2. Use the `dl` function:
-`dl [options] [filename]`
+```
+dl /path/to/your/file
+```
 
-### Options
-
-- `-p <port>`: Specify a custom port (default is 4443)
+Options:
+- `-p <port>`: Specify a custom port
 - `-r`: Use a random port
 
-### Examples
-
-1. Serve a file on the default port:
-- `dl myfile.txt`
-
-2. Serve a file on a specific port:
-- `dl -p 8080 myfile.txt`
-
-3. Serve a file on a random port:
-- `dl -r myfile.txt`
-
-## How it works
-
-1. The script generates a self-signed SSL certificate.
-2. It sets up a Python HTTPS server with the specified or random port.
-3. The server uses the `EncodingAwareHandler` to properly handle files with different encodings.
-4. The script provides the HTTPS URL to access the file.
+Follow the on-screen instructions to download the file securely.
 
 ## Security Note
 
-This script generates a self-signed certificate, which may trigger security warnings in browsers. For production use, consider using a properly signed certificate.
+This script uses a self-signed SSL certificate. While this encrypts the connection, it does not provide authentication. Use this script only in trusted environments.
 
-## Limitations
+## License
 
-- The script serves files from the current directory.
-- It's designed for temporary file sharing and not for long-term hosting.
-
-## Contributing
-
-Contributions, issues, and feature requests are welcome.
+[MIT License](LICENSE)
